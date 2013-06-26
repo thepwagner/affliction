@@ -1,0 +1,38 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'jetty'
+
+repositories {
+    mavenCentral()
+    mavenRepo url: 'http://corp.array.ca/nest-web/maven'
+}
+
+ext {
+    jerseyVersion = '1.17.1'
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile 'ch.qos.logback:logback-classic:1.0.9'
+
+    compile 'com.google.guava:guava:14.0.1'
+
+    compile 'com.google.inject.extensions:guice-servlet:3.0'
+    compile 'net.sf:javaml:0.1.7'
+
+    // Web:
+    compile "com.sun.jersey:jersey-servlet:${jerseyVersion}"
+    compile "com.sun.jersey:jersey-server:${jerseyVersion}"
+    compile "com.sun.jersey:jersey-core:${jerseyVersion}"
+    compile "com.sun.jersey:jersey-json:${jerseyVersion}"
+    compile "com.sun.jersey.contribs:jersey-guice:${jerseyVersion}"
+    compile "com.sun.jersey:jersey-servlet:${jerseyVersion}"
+    providedCompile 'javax.servlet:servlet-api:2.5'
+
+    testCompile 'junit:junit:4.11'
+}
+
+jettyRun {
+    contextPath = ''
+}
